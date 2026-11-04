@@ -1,445 +1,200 @@
 # AGENTS.md
 
-## Purpose
+## Purpose and authority
 
-This repository is the source of truth for the EU Web Accessibility Directive (WAD) and the related EN 301 549-based implementation logic used to assess public sector websites and mobile applications. This file provides operational guidance for one or more autonomous agents managing a compliance process, evidence workflow, and reporting cycle.
+This repository is the operational and evidential baseline for applying the EU Web Accessibility Directive (WAD) and the related EN 301 549 requirements to public-sector websites and mobile applications. Use the repository's legal/evidence guide for interpretation, this file for workflow, and the testing matrix and prompt library for requirement-level test planning and execution.
 
-The agent must use this repository as the legal and evidential baseline, while also using relevant supporting practices from within the Double FW organisation where they are necessary to operationalise the legal requirements.
+This material does not replace national implementing law, regulator decisions, legal advice, procurement advice, or formal legal/compliance sign-off. Where applicability, exclusions, burden, standards selection, or a compliance claim is uncertain, preserve the uncertainty and escalate to a qualified human reviewer. Do not invent a legal conclusion.
 
-## Authority and scope boundaries
+## Repository resources and order of use
 
-This repository provides:
+Use these resources together; do not treat any one as a complete substitute for the others:
 
-- legal interpretation context for the WAD and related public-sector accessibility duties
-- practical assessment guidance for the Directive's required accessibility outcomes
-- evidence and process guidance for testing, records and statements
-- framing for product, project and reporting workflows
+1. `WAD_Plain_English_Breakdown_and_Evidence_Guide.md` — legal context, scope, exclusions, duties, evidence and reporting guidance.
+2. `EN301549_Requirements_Test_Matrix.md` — requirement/test IDs, procedures, expected outcomes, user groups, method classifications, tool boundaries, manual complements, source snapshots, and evidence/decision rules.
+3. `EN301549_AI_Test_Prompts.md` — requirement-specific prompts and the mandatory execution contract. Each prompt links to its matrix test. Load the selected prompt and corresponding matrix row/specification together.
+4. `WAD_Requirements_to_Double_FW_Approaches_Mapping.md` — relevant Double FW practices and supporting resources; use as supporting operational context, not as a replacement for the legal baseline or matrix.
 
-This repository does not replace:
+The matrix and prompts are test-design resources, not records of product tests already performed. Check the current repository versions and linked source snapshots at the start of a work item. Record the versions/commit IDs used. Do not assume a prompt, test, source snapshot, or external QA relationship has remained current without checking it.
 
-- national implementing law
-- regulator decisions or enforcement interpretations
-- procurement or public-sector legal advice
-- formal legal sign-off
-- a vendor certification or a single automated accessibility score
-
-When a legal question is uncertain, the agent must escalate to a human reviewer or legal/compliance authority and preserve the uncertainty in the record.
+## Core principles
 
-## Core operating principles
+1. Treat accessibility as a public-service obligation and assess whether people can obtain information and complete meaningful tasks.
+2. Separate legal applicability, technical observations, user outcomes, operational duties, and evidence.
+3. Maintain a requirement register; do not substitute an ad hoc defect list or aggregate score.
+4. Use the matrix as the test plan and trace every test to requirements, user needs, tasks, evidence, and follow-up actions.
+5. Use prompts only within their declared capability and decision limits. Do not infer observations or tool actions that did not occur.
+6. Automation is one evidence source, never proof of compliance. A clean scan is not a requirement pass.
+7. Preserve uncertainty and distinguish tested observations from requirement-level conclusions.
+8. Keep exclusions and disproportionate-burden assessments separate from technical results.
+9. Maintain traceability: scope -> requirement -> test -> evidence -> finding/action -> retest/review -> reporting.
 
-1. Treat the Directive as a public-service accessibility obligation, not a generic web-quality task.
-2. Distinguish between legal applicability, technical assessment and operational evidence.
-3. Keep scope, exclusions, burden assessments and application dates separate and explicit.
-4. Use a requirement register rather than ad hoc issue lists.
-5. Prefer task-based evidence over isolated rule counts.
-6. Do not treat automation as proof of compliance.
-7. Preserve uncertainty when the evidence is incomplete.
-8. Tie each finding to a requirement, a user need, a test or a task outcome, and a remediation/monitoring action.
-9. Keep statements, feedback routes and monitoring records aligned with actual service delivery.
-10. Use traceability across the full lifecycle: scope -> requirement -> assessment -> evidence -> corrective action -> review.
-
-## Agent role and responsibilities
+## Required workflow
 
-The agent may be assigned responsibilities including, but not limited to:
+### 1. Establish service and legal context
 
-- scope identification and legal applicability review
-- website or app inventory and boundary definition
-- requirement mapping against Article 4 principles and EN 301 549 conditions
-- sampling and task selection
-- testing coordination across automated, manual and assistive technology checks
-- evidence management
-- defect tracking and remediation monitoring
-- accessibility statement drafting and review
-- reporting to stakeholders and leadership
-- monitoring and periodic review
+Create or confirm a project/service record with:
 
-The agent must not claim full compliance without evidence and must preserve a clear distinction between:
+- public body, organisational classification, jurisdiction and applicable national law;
+- service, website/app/document boundary, version/build/platform and publication status;
+- responsible public-body and supplier owners;
+- assessment date, statement publication route and reviewer;
+- legal basis and sources used for scope and applicability decisions.
 
-- applicable requirements
-- tested requirements
-- met requirements
-- not met requirements
-- excluded requirements
-- not assessed requirements
-- disproportionate burden assessments
+Escalate uncertain legal classification or national implementation questions. A supplier's involvement does not transfer public-body accountability.
 
-## Required production workflow
+### 2. Define scope, applicability and exclusions
 
-### 1. Establish the project and legal context
+Inventory services, routes, screens, documents, media, embedded content and third-party components. For each asset/function, record whether it is in scope, applicable requirements, relevant dates, and the evidence and rationale. Consider each exclusion and disproportionate-burden claim individually, including the relevant content/function, conditions, alternatives, owner and review date. Do not record an exclusion or burden claim as a technical pass.
 
-Create or confirm a project record containing:
+Use the matrix's `SCOPE-*` tests when relevant and the applicable governance tests for the operating process. Scope decisions require human review where the matrix or law requires it.
 
-- public body name and organisational classification
-- relevant national implementing law and jurisdiction
-- website, app or document scope
-- version/platform details
-- responsible owner(s)
-- publication or release status
-- statement publication route
-- assessment date
+### 3. Establish the baseline and build the requirement register
 
-Record the legal basis used for deciding whether the site or app falls within scope.
+Declare the selected EN 301 549 version, applicable legal baseline, Annex A table/source, WCAG version or additional criteria, and any separately adopted organisational requirements. The matrix preserves the repository's stated baseline; it does not independently establish which standard/version is currently legally cited. Verify current applicability with the guide and human legal/compliance review where needed.
 
-### 2. Define scope and exclusions
+For every potentially applicable clause, create a record with at least:
 
-For each digital service or component, determine:
+- requirement ID and exact clause/subclause, standard/version and source snapshot;
+- matrix test ID and prompt ID, if one exists;
+- service/asset and applicability status with evidence-based reason;
+- affected user need/group, task and expected outcome;
+- test method(s), conditions, thresholds, exceptions and manual complement;
+- observation status, evidence references, owner, action and review date.
 
-- whether it is a website, app, document or mixed digital service
-- whether it is in scope under the Directive
-- whether an exclusion applies
-- whether content is archival, legacy or published before relevant thresholds
-- whether a public body uses outsourced or third-party services
-- whether a disproportionate-burden assessment is required
+Select matrix tests by applicable asset and function: `WEB-*` for web content, `DOC-*` for documents, `APP-*` for native/hybrid apps, `EN-*` for relevant additional EN requirements, `SCOPE-*` for legal/scope conditions, and `GOV-*` for governance and service-outcome assurance. Do not assume a webview test covers native UI or downloaded documents. Do not omit applicable rows merely because they have no prompt or automated coverage.
 
-Flag any exclusion or burden exemption separately, and never merge it into a technical pass/fail record.
+For conditional EN requirements, identify the precise Annex A selection, subclauses, conditions, thresholds and exceptions before testing. Record each applicable subclause separately; never treat an entire family as passed based on a representative subcondition.
 
-### 3. Build the requirement register
+### 4. Select representative samples and tasks
 
-Create a requirement register aligned to the Directive's required outcomes and EN 301 549 requirements.
+Use the matrix's `GOV-03` and relevant test procedures to define a representative sample. Include, as applicable, landing/home routes, access/sign-in, complete primary service journeys, forms, search/navigation, help/feedback, error/recovery/confirmation states, documents/media, responsive states, and the accessibility statement. Include relevant platforms, browsers, assistive technologies, content types, user groups and intersecting needs. Document selection rationale, limits, and gaps. Expand the sample when a systemic pattern or material uncertainty is found.
 
-Use at minimum these categories:
+Test complete tasks, not just isolated controls. Record task, starting state, expected result, task completion, barriers and recovery. AI or automated analysis cannot replace real-user outcome evidence required by `GOV-05`; that test is human/participant-led as specified by the matrix.
 
-- perceivable
-- operable
-- understandable
-- robust
-- statements and feedback routes
-- monitoring and enforcement information
-- mobile app-specific requirements when applicable
-- documents, media and downloadable content requirements
-
-Each requirement entry should include:
-
-- identifier
-- legal requirement or clause reference
-- applicable service or page
-- requirement description
-- user outcome
-- expected behaviour
-- test method or methods
-- status
-- evidence reference
-- owner
-- action date
-- review date
-
-### 4. Select a representative test sample
-
-The agent should select a sample that is meaningful and representative of the service, not just a home page.
-
-Minimum sample patterns should generally include:
-
-- home page and landing routes
-- sign-in or access route
-- primary public service transaction or form
-- search and navigation
-- help, contact or support paths
-- error, loading, empty and confirmation states
-- document and media pages when relevant
-- accessibility statement and feedback mechanism
-
-If a finding indicates systemic issues, expand the sample before concluding on the service-wide status.
-
-### 5. Execute testing in layered form
-
-Use a layered testing model:
+### 5. Select and run matrix tests and prompts
 
-- automated scans for structural signal and regression detection
-- manual technical inspection for semantics, context and implementation details
-- keyboard and alternative-input testing
-- screen reader and magnification testing where relevant
-- document and media review where relevant
-- user testing with disabled participants where the evidence need is material
-
-Do not treat any one method as sufficient.
+For each selected test:
 
-### 6. Record evidence under a strict evidence model
-
-Each issue or success record should include:
-
-- exact content or page tested
-- task or user outcome being assessed
-- expected result
-- method and tools used
-- environment and platform details
-- assistive technology used where relevant
-- observed result
-- evidence evidence references
-- status
-- action owner
-- target date
+1. Read the entire relevant matrix row and detailed test specification, including its source, expected outcome, method classifications, automation boundary, required capabilities, evidence requirements and manual complement.
+2. If a prompt exists, read its entire entry and apply the prompt library's **mandatory execution contract**. Load the contract, selected prompt, corresponding matrix row/specification, exact applicable clause conditions, and the necessary service/test context together.
+3. Confirm required permissions, tools, fixtures and environment before acting. If inputs, capability, access or permission are missing, execute only independent authorised parts and mark the remainder `blocked` or `not_tested`; do not fabricate results.
+4. Use authorised test accounts and reversible fixtures. Do not submit real forms/messages, contact support, file complaints, make purchases, publish statements, alter real biometric records, or perform other consequential actions without explicit authorisation and safeguards.
+5. Execute only through the input method and measurement capability stated by the test. For example, DOM-triggered clicks or programmatically setting focus do not prove keyboard reachability. Preserve repeatable actions, raw outputs/measurements and relevant settings.
+6. Record method-specific limits. For axe, use only matrix-assigned candidate rule IDs; record installed version, rule availability, enabled rules/tags/options, exclusions and tested states. Distinguish rule violations from incomplete rule coverage. Never infer that unspecified axe rules cover a test.
+7. Complete the matrix-specified human technical, AT, editorial, specialist or user complement. If it has not occurred, keep the full requirement open and state what remains.
 
-Where evidence is missing or uncertain, use a state such as:
+Classifications mean:
 
-- not_assessed
-- cannot_tell
-- blocked
-- tool_error
-- pending_retest
+- **E (AI execution):** only the prompt's stated observable subset can be executed, using the required real tools and inputs. It does not establish full criterion conformance.
+- **A (AI-assisted):** inventory, comparison, extraction or candidate findings only; semantic adequacy, user impact, legal judgment or service effectiveness remains for a human.
+- **N/manual-only:** no AI substitute is assigned. Obtain the specified human evidence.
+- **AXE partial/no coverage:** only named rules are assigned; no rule finding is not a pass and no coverage must not be filled by assumption.
 
-Never silently convert uncertainty into a pass.
+A prompt's test ID and a matrix test ID are traceability identifiers, not a compliance verdict. Do not run `GOV-05` as an AI prompt; the prompt library intentionally omits it because disabled-participant/user outcome evidence cannot be substituted by AI.
 
-## Reporting workflow
+### 6. Record observations and evidence
 
-### 1. Issue and status reporting
+Use the prompt library's required YAML execution record whenever executing a prompt. Preserve its fields, including `test_id`, `prompt_id`, source snapshot, exact requirement, QA references, applicability, scope, environment, automation class, steps, expected and actual results, per-subcondition observations, evidence, inference/direct-observation basis, manual review, untested conditions, candidate defects, reviewer and next action. Keep `requirement_status: not_assessed` until an authorised reviewer combines all applicable conditions, direct evidence and required human complements.
 
-The agent must generate status reports that separate:
+For non-prompt records, capture equivalent information. Each evidence item should identify:
 
-- applicability
-- technical assessment
-- user-experience outcome
-- operational compliance
+- exact asset/URL/file, build/version/hash, route/screen and tested state;
+- task, applicable requirement/test ID and specific subcondition;
+- expected and observed result, with steps and method;
+- environment, tool/AT versions and settings, measurements and raw outputs as appropriate;
+- evidence location/reference, date, limitations, privacy/retention handling;
+- reviewer, finding/action owner, retest criteria and next review.
 
-Do not combine them into one aggregate percentage unless the evidence supports a defensible and meaningfully segmented metric.
+Use observation statuses only as defined by the matrix: `pass`, `fail`, `blocked`, `cannot_tell`, `not_tested`, `not_applicable`, or `tool_error`. A status describes only the observed subcondition and scope. Keep requirement-level states distinct: applicable, tested, met, not met, excluded, not assessed, and disproportionate burden. Do not change uncertainty into a pass or classify missing evidence as failure without basis.
 
-Recommended reporting sections:
+### 7. Findings, remediation and retesting
 
-- Executive summary
-- Scope and applicability
-- In-scope assets and excluded/inapplicable assets
-- Testing performed
-- Key findings
-- Remediation status
-- Evidence and traceability references
-- Risks and decision points
-- Next review actions
+Link each finding to its requirement/test ID, affected task and user need, precise asset/state, evidence and impact. Record whether it is a design, content, code, third-party, or process/policy issue; wider-scope likelihood; owner; corrective action; due date; and specific retest conditions. On remediation, rerun the relevant matrix steps and necessary human complements, preserve before/after evidence, and set `pending_retest` until verified. A screenshot or statement of intent alone does not resolve a finding.
 
-### 2. Production reporting structure
+### 8. Reporting, statements and monitoring
 
-The agent should maintain a reporting artefact that contains:
+Report scope/applicability separately from technical observations, user outcomes and operational duties. Include method, sample and its limitations, requirement-level status, evidence traceability, open uncertainties, exclusions/burden decisions, remediation and next review. Do not present one aggregate percentage unless it is defensible, segmented and clearly explained.
 
-- service name
-- date of review
-- legal baseline used
-- sampling method
-- methodology used
-- requirement count and status summary
-- issues by severity and impact
-- remediation owner and target date
-- review triggers
-- statement update requirement
+Use applicable `GOV-*` tests to check statement location/content, feedback routes, enforcement information, review, monitoring, supplier ownership, training and regression control. Keep the accessibility statement aligned with actual service delivery and reviewed evidence. Do not assert full compliance based on automation, a partial sample, or unreviewed AI output.
 
-### 3. Statement and communication outputs
+## Status and decision rules
 
-For each in-scope website or app, ensure the compliance narrative supports the accessibility statement process.
+- Applicability is determined by service scope, function and law—not by whether a test tool can run.
+- A test observation pass is limited to the exact condition, asset, state, sample and method observed.
+- A requirement-level pass/met status requires all applicable conditions and required evidence, including manual complements, to be reviewed by an authorised person.
+- An exclusion or burden assessment is a distinct documented decision, not a technical pass.
+- A positive result in one route, state, platform or user task does not establish universal accessibility.
+- A narrow or incomplete sample must be reported with limitations and follow-up; it cannot support an unrestricted service-wide claim.
+- The public body remains accountable for outsourced services and third-party components within its responsibility.
 
-Required narrative areas include:
+## Escalation
 
-- organisation and scope
-- date of assessment
-- applicable requirements and standards
-- compliance status
-- inaccessible content and reasons
-- alternatives where appropriate
-- method used for assessment
-- feedback route and contact details
-- enforcement path
+Escalate to a human reviewer or legal/compliance authority when scope, national law, applicable baseline, exceptions or burden are unclear; supplier responsibility is disputed; statement/compliance status is to be asserted; evidence conflicts across tools, AT or user testing; a requirement depends on semantic/editorial judgment; a required user/AT/specialist complement is outstanding; or evidence could affect public accountability or enforcement records. Preserve both the unresolved question and the basis for escalation.
 
-The agent must not claim full compliance from an automated scan or from partial testing alone.
+## Close-out checklist
 
-## Remediation and governance instructions
+Before closing a cycle, confirm that:
 
-### 1. Remediation handling
+- service boundaries, legal basis, baseline and source snapshots are recorded;
+- applicable requirements and relevant matrix test IDs are registered, including conditional subclauses;
+- exclusions and burden assessments are separately justified and reviewed;
+- representative samples and complete tasks are documented with limitations;
+- prompts were paired with their matrix procedures and execution contract, where applicable;
+- tool boundaries, actual methods, evidence and human complements are accurately represented;
+- observations, requirement statuses, findings, remediations and retests are traceable;
+- user outcome evidence and operational governance have not been replaced by automated checks;
+- statement/report updates, owners, monitoring cadence and review triggers are assigned;
+- unresolved issues, uncertainties and legal decisions are escalated rather than silently closed.
 
-When a requirement fails:
+## Record templates
 
-- identify the exact requirement and affected user need
-- document the barrier and impact
-- assign an owner and target date
-- specify the corrective action
-- record the evidence to be rechecked
-- status the item as open, in-progress, resolved or retest required
+Use the prompt library's YAML schema for prompt executions. For other records, use the following minimum fields and extend them to match the matrix requirements.
 
-For each issue, distinguish between:
-
-- design issue
-- content issue
-- code issue
-- third-party dependency issue
-- policy or process gap
-
-### 2. Exception handling
-
-Exceptions and burden assessments must be recorded separately from technical failures.
-
-When an exception is used:
-
-- identify the exact requirement affected
-- explain the reason for the exception or burden claim
-- record the affected content or function
-- identify the action and alternative arrangement
-- record review date and owner
-
-Do not treat a burden assessment as a technical pass.
-
-### 3. Monitoring and regression control
-
-The agent should maintain a monitoring cycle to detect regressions in:
-
-- design changes
-- content updates
-- CMS or publishing workflows
-- third-party components
-- new features and service journeys
-- app and operating-system updates
-
-Monitoring should include:
-
-- scheduled review cadence
-- change-based retesting
-- issue trend analysis
-- control effectiveness review
-- publication and statement updates
-
-## Decision rules for agents
-
-The agent should apply these rules in all cases:
-
-- A requirement is applicable only when the service or function exists and the legal scope applies.
-- A failure is not resolved by a screenshot or a statement of intent alone.
-- A requirement can be technically met but still fail from a user-outcome perspective.
-- A positive user experience in one case does not prove universal access for all affected users.
-- A narrow sample cannot be used to claim full service compliance without clear limitations and follow-up.
-- A public-sector service remains accountable even where delivery is outsourced.
-
-## Tool use and evidence capture guidance
-
-When working in an automated environment, the agent should maintain evidence in a structured and reviewable form.
-
-Recommended evidence objects:
-
-- service_record
-- requirement_record
-- task_record
-- finding_record
-- remediation_record
-- statement_record
-- monitoring_record
-
-Each record should include:
-
-- identifier
-- date
-- service or page reference
-- requirement or clause reference
-- user need and context
-- method
-- result status
-- evidence links or stored data
-- owner
-- next action
-
-## Recommended output templates
-
-### A. Requirement record template
+### Requirement record
 
 ```text
-ID:
-Requirement:
-Legal reference:
-Service / page / app:
-User need:
-Expected result:
-Method:
-Evidence:
-Status:
-Owner:
-Target review date:
-Notes:
+Requirement ID / exact clause and version:
+Matrix test ID / prompt ID:
+Source snapshot:
+Service / asset / platform:
+Applicability and rationale:
+User need / task:
+Expected outcome and conditions:
+Methods / manual complement:
+Observation and requirement status:
+Evidence references:
+Owner / action / review date:
+Limitations / uncertainty:
 ```
 
-### B. Finding record template
+### Finding record
 
 ```text
-Finding ID:
-Requirement ID:
-Page / screen / function:
-Barrier description:
-Affected user need:
-Observed result:
-Evidence:
-Severity / impact:
-Likelihood of wider issue:
-Owner:
-Corrective action:
-Retest requirement:
+Finding ID / requirement and test IDs:
+Asset / state / task:
+Barrier and affected user need:
+Expected / observed result:
+Method / evidence references:
+Impact / wider-scope likelihood:
+Issue type:
+Owner / corrective action / target date:
+Retest conditions / status:
 ```
 
-### C. Compliance report summary template
+### Report summary
 
 ```text
-Scope:
-Date:
-Applicable law:
-Assessment method:
-Sample tested:
-Applicable requirements:
-Met:
-Not met:
-Not assessed:
-Excluded:
-Burden exceptions:
-Key issues:
-Remediation status:
-Statement update required:
-Recommended actions:
+Service / scope / jurisdiction / applicable law:
+Baseline, versions and source snapshots:
+Assessment date / reviewer:
+Sample, tasks and limitations:
+Applicable requirements / tests:
+Met / not met / not assessed / excluded:
+Burden assessments (separate):
+Methods and human complements:
+Key evidence and findings:
+Remediation / retest status:
+Statement and monitoring actions:
+Open uncertainty / escalation / next review:
 ```
-
-## Decision escalation rules
-
-Escalate to a human reviewer when:
-
-- the service scope or legal classification is unclear
-- an exclusion is claimed but evidence is limited
-- there is a disproportionate-burden assessment
-- a statement or compliance status is being asserted
-- a supplier or contractor is involved in scope responsibility
-- user-testing or assistive-technology findings conflict with automated results
-- a service has complex data, media or documents with unclear accessibility treatment
-- a change is likely to affect public accountability or enforcement records
-
-## Production checklist for compliance work
-
-Before closing a compliance cycle, confirm:
-
-- scope is documented
-- applicable requirements are identified
-- exclusions and burden assessments are recorded separately
-- representative sample was used
-- testing methods are described and evidence is retained
-- findings are linked to requirements and tasks
-- remediations are owned and tracked
-- a statement or report has been drafted in the correct form
-- monitoring and review triggers are assigned
-
-## Safety and governance guardrails
-
-The agent must:
-
-- preserve traceability and source identity
-- avoid overclaiming based on automation
-- keep legal interpretation separate from operational test execution
-- avoid collapsing user outcomes into a single score
-- show uncertainty explicitly when evidence is incomplete
-- keep business and compliance roles distinct from technical remediation roles
-- record when the evidence is insufficient for a legal conclusion
-
-## Working assumptions for a connected compliance system
-
-This repository works best when used as a connected evidence system across:
-
-- scope and legal classification
-- requirement register
-- test execution
-- defect management
-- corrective action and retesting
-- statement/reporting outputs
-- monitoring and ongoing review
-
-If the agent is supporting a production workflow, it should treat the compliance process as a continuous operating cycle rather than a one-off audit.
-
-## Summary
-
-The agent's mission is to maintain an evidence-based, traceable accessibility compliance process for public-sector websites and apps, using the WAD and related EN 301 549 guidance in this repository as the source of truth. It must make the law operational through meaningful testing, clear evidence, honest status reporting, and sustained governance.
-
-The end state is not merely a list of defects; it is a defensible record that shows which requirements apply, what was tested, what evidence exists, what remains unresolved, and what action is required to improve accessibility and maintain compliance over time.
