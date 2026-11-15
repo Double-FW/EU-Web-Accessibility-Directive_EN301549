@@ -1,0 +1,28 @@
+{
+  "source_repository": "Double-FW/EU-Web-Accessibility-Directive_EN301549",
+  "destination_dataset": "GarethFW/Implementing_the_EU_Web_Accessibility_Directive_and_EN301549",
+  "dataset_version": "1.0.0",
+  "files": [
+    "AGENTS.md",
+    "EN301549_AI_Test_Prompts.md",
+    "EN301549_Requirements_Test_Matrix.md",
+    "EU_Web_Accessibility_Directive_EN301549_RAG.md",
+    "README.md",
+    "WAD_Plain_English_Breakdown_and_Evidence_Guide.md",
+    "WAD_Requirements_to_Double_FW_Approaches_Mapping.md"
+  ],
+  "required_files": [
+    "AGENTS.md",
+    "EN301549_AI_Test_Prompts.md",
+    "EN301549_Requirements_Test_Matrix.md",
+    "EU_Web_Accessibility_Directive_EN301549_RAG.md",
+    "README.md",
+    "WAD_Plain_English_Breakdown_and_Evidence_Guide.md",
+    "WAD_Requirements_to_Double_FW_Approaches_Mapping.md",
+    "LICENSE"
+  ],
+  "document_only_files": [
+    "EU_Web_Accessibility_Directive_EN301549_RAG.md"
+  ],
+  "approved_license_sha256": "7ef02bc0b6ba376de57be5f27784eef23df6a74068a4a2a172f95ba2c605b7af"
+}
