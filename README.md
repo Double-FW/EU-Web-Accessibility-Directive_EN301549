@@ -105,3 +105,11 @@ The repository supports both human decision-making and structured AI assistance.
 ## Project status
 
 This repository is intended as a practical, traceable, and standards-aware implementation guide for public sector accessibility work. It should be used to support evidence-led compliance management and transparent reporting, while keeping legal interpretation and final compliance decisions anchored in formal governance and human review.
+
+## About the author
+
+Gareth Ford Williams is a senior leader in accessibility and inclusive design and co-founder of Double FW Ltd. His work spans accessibility, UX, technical standards, assistive technology and inclusive media. At the BBC, he led accessibility and UX work and chaired standards governance, translating research and policy into practical guidance.
+
+## About Double FW Ltd
+
+Double FW Ltd is a UK accessibility and inclusive design consultancy. It helps organisations build accessibility into strategy, governance, brands, products, content and services. Its public repositories provide practical guidance for people and AI-assisted workflows.
